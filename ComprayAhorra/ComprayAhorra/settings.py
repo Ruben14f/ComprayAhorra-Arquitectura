@@ -85,11 +85,11 @@ WSGI_APPLICATION = 'ComprayAhorra.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'comprayhorra_db',
-        'USER': 'adminuser',
-        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': 'dpg-cspqaadds78s73c230h0-a.db.render.com',
-        'PORT': '5432',
+        'NAME': 'comprayahorra_db',  # Nombre de la base de datos
+        'USER': 'adminuser',         # Nombre de usuario
+        'PASSWORD': '7aMze3gULyvMe7XlcihS1rg35z0H2AJy',  # Contraseña
+        'HOST': 'dpg-cspqaadds78s73c230h0-a.oregon-postgres.render.com',  # Hostname externo
+        'PORT': '5432',  # Puerto de PostgreSQL
     }
 }
 
