@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='hasdjdashjshajdhjshajdshdj')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'RENDER' not in os.environ
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
@@ -86,10 +86,10 @@ WSGI_APPLICATION = 'ComprayAhorra.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'comprayahorra_db',
-        'USER': 'adminuser',
-        'PASSWORD': '7aMze3gULyvMe7XlcihS1rg35z0H2AJy',
-        'HOST': 'dpg-cspqaadds78s73c230h0-a.oregon-postgres.render.com',
+        'NAME': os.environ.get('DB_NAME', 'comprayahorra_db'),
+        'USER': os.environ.get('DB_USER', 'adminuser'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '7aMze3gULyvMe7XlcihS1rg35z0H2AJy'),
+        'HOST': os.environ.get('DB_HOST', 'dpg-cspqaadds78s73c230h0-a.oregon-postgres.render.com'),
         'PORT': '5432',
     }
 }
@@ -132,10 +132,11 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+    
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
