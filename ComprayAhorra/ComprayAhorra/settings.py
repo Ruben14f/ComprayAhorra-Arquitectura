@@ -12,15 +12,12 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-from django.core.wsgi import get_wsgi_application
 
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ComprayAhorra.settings')
 
-application = get_wsgi_application()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -89,11 +86,11 @@ WSGI_APPLICATION = 'ComprayAhorra.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'comprayahorra_db',  # Nombre de la base de datos
-        'USER': 'adminuser',         # Nombre de usuario
-        'PASSWORD': '7aMze3gULyvMe7XlcihS1rg35z0H2AJy',  # Contraseña
-        'HOST': 'dpg-cspqaadds78s73c230h0-a.oregon-postgres.render.com',  # Hostname externo
-        'PORT': '5432',  # Puerto de PostgreSQL
+        'NAME': 'comprayahorra_db',
+        'USER': 'adminuser',
+        'PASSWORD': '7aMze3gULyvMe7XlcihS1rg35z0H2AJy',
+        'HOST': 'dpg-cspqaadds78s73c230h0-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
@@ -132,9 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'login/static'),
-]
+
 
 STATIC_URL = '/static/'
 if not DEBUG:
