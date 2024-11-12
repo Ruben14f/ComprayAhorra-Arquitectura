@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'comprayhorra_db',
         'USER': 'adminuser',
         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': 'dpg-cspqaadds78s73c230h0-a',
+        'HOST': 'dpg-cspqaadds78s73c230h0-a.db.render.com',
         'PORT': '5432',
     }
 }
