@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-from urllib.parse import urlparse
 
 
 
@@ -83,21 +82,16 @@ WSGI_APPLICATION = 'ComprayAhorra.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
-
-
-if DATABASE_URL:
-    url = urlparse(DATABASE_URL)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': url.path[1:],  
-            'USER': url.username,
-            'PASSWORD': url.password,
-            'HOST': url.hostname,
-            'PORT': url.port,
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'comprayhorra_db',
+        'USER': 'adminuser',
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+        'HOST': 'dpg-cspqaadds78s73c230h0-a',
+        'PORT': '5432',
     }
+}
 
 
 # Password validation
