@@ -6,7 +6,7 @@ set -o errexit  # Termina el script si algún comando falla
 pip install -r requirements.txt
 
 # Recopilar archivos estáticos para producción
-python manage.py collectstatic --noinput
+python ComprayAhorra/manage.py collectstatic --noinput
 
 # Aplicar las migraciones de base de datos
-python manage.py migrate
+python ComprayAhorra/manage.py migrate
