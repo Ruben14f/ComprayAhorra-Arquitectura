@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -81,14 +83,9 @@ WSGI_APPLICATION = 'ComprayAhorra.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'base_de_datos',     # Nombre de tu base de datos en pgAdmin
-        'USER': 'miusuario',          # Usuario que creaste
-        'PASSWORD': 'admin123',  # Contraseña del usuario
-        'HOST': 'localhost',          # 'localhost' si es en tu PC local
-        'PORT': '5432',               # Puerto de PostgreSQL
-    }
+    'default': dj_database_url.config(
+        default='postgres://miusuario:admin123@localhost:5432/base_de_datos'
+    )
 }
 
 
