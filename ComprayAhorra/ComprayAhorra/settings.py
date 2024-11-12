@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-import dj_database_url
+from urllib.parse import urlparse
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -82,11 +83,21 @@ WSGI_APPLICATION = 'ComprayAhorra.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://miusuario:admin123@localhost:5432/base_de_datos'
-    )
-}
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+
+if DATABASE_URL:
+    url = urlparse(DATABASE_URL)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': url.path[1:],  
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+        }
+    }
 
 
 # Password validation
