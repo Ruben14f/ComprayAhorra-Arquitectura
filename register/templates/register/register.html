@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Registrarse{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+
+    <div class="card">
+        <h3 class="title">
+            <i class="bi bi-shop"></i> Registro
+        </h3>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}                
+                <div class="mb-3">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.email.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+                
+                <div class="mb-3">
+                    {{ form.password1.label_tag }}
+                    {{ form.password1 }}
+                    {% if form.password1.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.password1.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {% if form.password2.errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.password2.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="boton">
+                    <button class="btn btn-primary" type="submit">Registrarse</button>
+                </div>
+            </form>
+
+            <div class="olvidados">
+                <a href="{% url 'login' %}">¿Ya tienes cuenta? Inicia sesión</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
