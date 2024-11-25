@@ -24,7 +24,8 @@ def IniciarSesion(request):
                 if user is not None:
                     # Login del usuario
                     auth_login(request, user)
-                    return redirect('register')  
+                    messages.success(request, "Has iniciado sesión correctamente.")
+                    return redirect('inicio')  # Redirige a la página principal o al área de usuario
                 else:
                     messages.error(request, "Credenciales incorrectas.")
             else:
