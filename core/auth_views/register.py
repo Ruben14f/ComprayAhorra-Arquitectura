@@ -1,24 +1,22 @@
 from django.shortcuts import redirect, render
-from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse
-from .forms import Registro
-from django.views.generic import CreateView
+from core.forms import RegisterForm
 from django import forms
 
 # Create your views here.
-def register(request):
+def register_view(request):
     if request.method == 'POST':
-        form = Registro(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()  # Guarda el nuevo usuario
             # Redirige al login después de registrarse
             return redirect(reverse('login') + '?register')
     else:
-        form = Registro()
+        form = RegisterForm()
 
     # Personalización de los campos del formulario
     form.fields['email'].widget = forms.EmailInput(attrs={'class': 'form-control mb-2', 'placeholder': 'tu_correo@gmail.com'})
     form.fields['password1'].widget = forms.PasswordInput(attrs={'class': 'form-control mb-2', 'placeholder': '***********'})
     form.fields['password2'].widget = forms.PasswordInput(attrs={'class': 'form-control mb-2', 'placeholder': '***********'})
 
-    return render(request, 'register/register.html', {'form': form})
+    return render(request, 'core/register/register.html', {'form': form})

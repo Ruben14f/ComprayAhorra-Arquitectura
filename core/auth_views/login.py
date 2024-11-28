@@ -2,9 +2,9 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import LoginForm
+from core.forms import LoginForm
 
-def IniciarSesion(request):
+def login_view(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -30,8 +30,8 @@ def IniciarSesion(request):
                     messages.error(request, "Credenciales incorrectas.")
             else:
                 messages.error(request, "Usuario no encontrado.")
-            return render(request, 'login/login.html', {'form': form})
+            return render(request, 'core/login/login.html', {'form': form})
     else:
         form = LoginForm()
 
-    return render(request, 'login/login.html', {'form': form})
+    return render(request, 'core/login/login.html', {'form': form})
