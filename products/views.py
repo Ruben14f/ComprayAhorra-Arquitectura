@@ -15,3 +15,15 @@ class ProductListView(ListView):
             producto.price = '{:,.0f}'.format(producto.price).replace(',', '.')
             
         return context
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'products/product.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['object'].price = '{:,.0f}'.format(context['object'].price).replace(',', '.')
+            
+        return context
+    
+    

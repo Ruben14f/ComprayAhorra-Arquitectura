@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+
+
+{% block title %}Producto {% endblock %}
+
+{% block content %}
+{% load static %}
+<div>
+    
+    <div class="h1">{{product.title}}</div>
+    <div class="h5"><span>${{product.price}}</span></div>
+    <p>{{product.description}}</p>
+</div>
+
+{% endblock %}

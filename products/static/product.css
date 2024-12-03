@@ -38,13 +38,13 @@ main {
 .product h3 {
     font-size: 1.2em;
     color: #333;
-    margin: 50px 0px 25px 0px;
+    margin: 35px 0px 20px 0px;
 }
 
 .product p {
     font-size: 1em;
     color: #888;
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .product button {
@@ -62,23 +62,6 @@ main {
     background-color: #0056b3;
 }
 
-/*REFERENCIA A IMAGEN*/
-.image-placeholder {
-    width: 100%;
-    height: 200px;
-    background-color: #d3d3d3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px dashed #aaa;
-    color: #333;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.image-placeholder span {
-    text-align: center;
-}
 
 @media (max-width: 768px) {
     .product-list {
