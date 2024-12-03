@@ -1,0 +1,8 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'product.css' %}">
+
+<main id="productos" class="product-list">
+    {% for i in product_list %}
+        {% include 'products/snippets/product.html' %}
+    {% endfor %}
+</main>

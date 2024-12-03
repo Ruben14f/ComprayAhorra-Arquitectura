@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="product" >
+        {% if i.image %}
+        <img src="{{i.image.url}}"/>
+        {% endif %}
+    <h3>{{i.title}}</h3>
+    <p>${{i.price}}</p>
+    <p>{{i.description}}</p>
+    <button>Añadir al Carrito</button>
+</div>

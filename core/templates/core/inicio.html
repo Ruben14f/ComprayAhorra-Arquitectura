@@ -12,40 +12,15 @@
     <p>¡Compra y Ahorra más!</p>
 </div>
 
-<main id="productos" class="product-list">
-    <div class="product">
-        <div class="image-placeholder">
-            <span>400x500</span>
+<div class="col mt-5">
+    <h1>{{mensaje}}</h1>
+        <div class="row">
+           {% include "products/snippets/list_products.html" %}
         </div>
-        <h3>Nombre producto</h3>
-        <p>$10.000</p>
-        <button>Añadir al Carrito</button>
-    </div>
-    <div class="product">
-        <div class="image-placeholder">
-            <span>400x500</span>
-        </div>
-        <h3>Nombre producto</h3>
-        <p>$15.000</p>
-        <button>Añadir al Carrito</button>
-    </div>
-    <div class="product">
-        <div class="image-placeholder">
-            <span>400x500</span>
-        </div>
-        <h3>Nombre producto</h3>
-        <p>$15.000</p>
-        <button>Añadir al Carrito</button>
-    </div>
-    <div class="product">
-        <div class="image-placeholder">
-            <span>400x500</span>
-        </div>
-        <h3>Nombre producto</h3>
-        <p>$15.000</p>
-        <button>Añadir al Carrito</button>
-    </div>
-</main>
+</div>
+
+
+
 
 
 {% endblock %}
