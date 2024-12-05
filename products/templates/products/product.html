@@ -2,15 +2,36 @@
 
 
 
-{% block title %}Producto {% endblock %}
+{% block title %}Producto{% endblock %}
 
 {% block content %}
 {% load static %}
-<div>
-    
-    <div class="h1">{{product.title}}</div>
-    <div class="h5"><span>${{product.price}}</span></div>
-    <p>{{product.description}}</p>
+
+
+<link rel="stylesheet" href="{% static 'css/product_detail.css' %}">
+
+<div class="product-detail">
+    <div class="product-image">
+        <img src="{{product.image.url}}" loading="lazy">
+    </div>
+    <div class="product-info">
+        <h2>{{product.title | title }}</h2>
+        <p class="price">${{product.price}}</p>
+        <p class="description">{{product.description | capfirst  }}</p>
+        <div class="actions">
+            <button class="btn bg-secondary" onclick="decreaseQuantity()">-</button>
+            <input 
+              type="text" 
+              inputmode="numeric" 
+              pattern="[0-9]*" 
+              value="1" 
+              id="quantity-input" 
+              class="quantity-input">
+            <button class="btn bg-secondary" onclick="increaseQuantity()">+</button>
+            {% include 'cart/snippets/add.html'%}
+          </div>
+    </div>
 </div>
 
+<script src="{% static 'js/product.js' %}"></script>
 {% endblock %}
