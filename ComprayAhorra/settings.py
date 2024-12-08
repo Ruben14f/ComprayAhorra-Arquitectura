@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'ComprayAhorra.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'comprayahorra_db'),
-        'USER': os.environ.get('DB_USER', 'adminuser'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '7aMze3gULyvMe7XlcihS1rg35z0H2AJy'),
-        'HOST': os.environ.get('DB_HOST', 'dpg-cspqaadds78s73c230h0-a.oregon-postgres.render.com'),
+        'NAME': os.environ.get('DB_NAME', 'comprayahorra_db_new'),
+        'USER': os.environ.get('DB_USER', 'admin_new'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'CgeaGi43s99aWSrw1D3fs6AQsDXi1ZKW'),
+        'HOST': os.environ.get('DB_HOST', 'dpg-ctath22j1k6c738pmpo0-a.oregon-postgres.render.com'),
         'PORT': '5432',
     }
 }

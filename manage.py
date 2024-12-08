@@ -3,7 +3,7 @@
 import os
 import sys
 
-
+#python 3.11.0 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ComprayAhorra.settings')
