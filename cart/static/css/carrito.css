@@ -13,7 +13,14 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 2em;
+    object-fit: cover;
 }
+
+img{
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 
 .cart-table th,
 .cart-table td {

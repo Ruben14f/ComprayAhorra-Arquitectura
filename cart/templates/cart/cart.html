@@ -1,12 +1,13 @@
 {% extends 'core/base.html' %}
 
+{% load funcion_tag %}
 {% load static %}
 {% block content %}
 
 <link rel="stylesheet" href="{% static 'css/carrito.css' %}">
 
-
-<div class="cart">
+{% if cart.products.exists %}
+  <div class="cart">
     <h2>Tu Carrito</h2>
     <table class="cart-table">
       <thead>
@@ -19,23 +20,27 @@
         </tr>
       </thead>
       <tbody>
+
+      {% for cart_product in cart.products.all %}
         <tr>
-          <td>
-            <div class="product">
-              <img src="product.jpg" alt="Producto">
-              <span>Nombre del Producto</span>
-            </div>
+          <!-- <th>{{forloop.counter}}</th> --> 
+          <td style="display: flex; flex-direction: column; align-items: center;">
+            {% if cart_product.product.image %}
+                <img src="{{cart_product.product.image.url}}" alt="imagenProducto" width="150" height="150">
+                <br>
+                <span>{{cart_product.product.title | capfirst }}</span>
+            {% endif %}
           </td>
           <td>
             <input type="number" min="1" value="1" class="quantity-input">
           </td>
-          <td>$20.00</td>
+          <td>{{cart_product.product.price | precio_tag}}</td>
           <td>$20.00</td>
           <td>
             <button class="remove-btn">Eliminar</button>
           </td>
         </tr>
-        <!-- Repite más filas para más productos -->
+      {% endfor %}
       </tbody>
     </table>
     <div class="cart-summary">
@@ -43,4 +48,12 @@
       <button class="checkout-btn">Proceder al Pago</button>
     </div>
   </div>
+
+  {% else %}
+
+  <div class="col">
+    <p class="h3">El carrito no tiene productos</p>
+    <a href="{% url 'inicio' %}">Comprar ahora</a>
+  </div>
+{% endif %}
 {% endblock %}
