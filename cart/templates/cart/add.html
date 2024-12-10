@@ -1,11 +1,22 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/add_cart.css' %}">
 
-<div class="col-3">
-    {% if product.image %}
-    <img src="{{product.image.url}}" alt="ProductoImagen" width="200" height="200">
-    {% endif %}
+<div class="card">
+    <div class="card-body">
+        <h2>Producto añadido</h2>
+        {% if product.image %}
+        <img src="{{product.image.url}}" alt="ProductoImagen" width="200" height="200">
+        <strong>{{product.title | capfirst}}</strong>
+        <h4>¡El producto ha sido añadido al carrito con éxito!</h4>
+        {% endif %}
+
+        <a href="{% url 'cart' %}" class="btn btn-primary">Ver Carrito</a>
+        <br>
+        <a href="{% url 'inicio' %}" class="btn btn-primary">Agregar mas productos</a>
+    </div>
 </div>
 
 {% endblock %}

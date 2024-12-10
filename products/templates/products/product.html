@@ -12,24 +12,17 @@
 
 <div class="product-detail">
     <div class="product-image">
+      {% if product.image %}
         <img src="{{product.image.url}}" loading="lazy">
+      {% endif %}
     </div>
     <div class="product-info">
         <h2>{{product.title | title }}</h2>
         <p class="price">{{product.price}}</p>
         <p class="description">{{product.description | capfirst  }}</p>
         <div class="actions">
-            <button class="btn bg-secondary" onclick="decreaseQuantity()">-</button>
-            <input 
-              type="text" 
-              inputmode="numeric" 
-              pattern="[0-9]*" 
-              value="1" 
-              id="quantity-input" 
-              class="quantity-input">
-            <button class="btn bg-secondary" onclick="increaseQuantity()">+</button>
             {% include 'cart/snippets/add.html'%}
-          </div>
+        </div>
     </div>
 </div>
 

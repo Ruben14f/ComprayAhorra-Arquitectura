@@ -5,7 +5,7 @@
         <img src="{{i.image.url}}" loading="lazy"/>
         {% endif %}
     <h3 class="card-text">{{i.title | title }}</h3>
-    <strong class="card-text">${{i.price}}</strong>
+    <strong class="card-text">{{i.price}}</strong>
     <p class="card-text">{{i.description | capfirst}}</p>
     <a class="btn btn-primary" href="{% url 'product' i.slug%}">Mas info</a>
 </div>

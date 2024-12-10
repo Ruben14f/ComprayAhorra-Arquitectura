@@ -15,45 +15,56 @@
           <th>Producto</th>
           <th>Cantidad</th>
           <th>Precio Unitario</th>
-          <th>Total</th>
+          <th>Subtotal</th>
           <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
+      {% for i in cart.product_related %}
+        {% with product=i.product %}
 
-      {% for cart_product in cart.products.all %}
-        <tr>
-          <!-- <th>{{forloop.counter}}</th> --> 
-          <td style="display: flex; flex-direction: column; align-items: center;">
-            {% if cart_product.product.image %}
-                <img src="{{cart_product.product.image.url}}" alt="imagenProducto" width="150" height="150">
-                <br>
-                <span>{{cart_product.product.title | capfirst }}</span>
-            {% endif %}
-          </td>
-          <td>
-            <input type="number" min="1" value="1" class="quantity-input">
-          </td>
-          <td>{{cart_product.product.price | precio_tag}}</td>
-          <td>$20.00</td>
-          <td>
-            <button class="remove-btn">Eliminar</button>
-          </td>
-        </tr>
+          <tr>
+            <td style="display: flex; flex-direction: column; align-items: center;">
+              {% if product.image %}
+                  <img src="{{product.image.url}}" alt="imagenProducto" width="150" height="150">
+                  <br>
+                  <span>{{product.title | capfirst }}</span>
+              {% endif %}
+            </td>
+            <td>{{ i.quantity }}</td>
+            <td>{{product.price | precio_tag}}</td>
+            <td>{{i.get_subtotal | precio_tag}}</td>
+            <td>
+              {% include 'cart/snippets/remove.html' %}
+            </td>
+          </tr>
+        {% endwith%}
       {% endfor %}
       </tbody>
     </table>
     <div class="cart-summary">
-      <p><strong>Total:</strong> $40.000</p>
+      <p><strong>Total:{{ cart.total | precio_tag}}</strong> </p>
       <button class="checkout-btn">Proceder al Pago</button>
     </div>
   </div>
-
-  {% else %}
-
-  <div class="col">
-    <p class="h3">El carrito no tiene productos</p>
-    <a href="{% url 'inicio' %}">Comprar ahora</a>
+{% else %}
+  {% if messages %}
+    <div class="alert-container">
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <br>
+  <div class="card">
+    <div class="card-body">
+      <p class="h3">El carrito no tiene productos</p>
+      <br>
+      <a href="{% url 'inicio' %}" class="btn btn-primary">Comprar ahora</a>
+    </div>
   </div>
+
 {% endif %}
 {% endblock %}

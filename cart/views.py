@@ -1,11 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from products.models import Product
 from .funciones import funcionCarrito
-from .models import Cart, CartProduct
+from .models import CartProduct
+from django.db.models import F
+
+
+
 
 
 # Create your views here.
-def carrito(request):
+def carrito(request):    
     cart = funcionCarrito(request)
     
     print(cart.products.all())
@@ -13,22 +17,41 @@ def carrito(request):
     
     return render(request, 'cart/cart.html',{
         'cart': cart
-        
     })
 
 def add(request):
     cart = funcionCarrito(request)
+    product = get_object_or_404(Product, pk=request.POST.get('product_id'))
+    quantity = int(request.POST.get('quantity', 1))
 
-    product_id = request.POST.get('product_id')
-    try:
-        product = Product.objects.get(id=product_id)
-    except (ValueError, Product.DoesNotExist):
-        return render(request, 'cart/error.html', {'message': 'Producto no encontrado o ID no válido'})
+    product_cart = CartProduct.objects.crearActualizar(cart=cart, product=product, quantity=quantity)
+    
+    
+    
+    
+    # Verificar si el producto ya está en el carrito
+    # cart_product = cart.cartproduct_set.filter(product=product).first()
 
-    # Añadir el producto a la tabla intermedia `CartProduct`
-    if not CartProduct.objects.filter(cart=cart, product=product).exists():
-        CartProduct.objects.create(cart=cart, product=product)
+    # if cart_product:
+    #     # Incrementar la cantidad existente
+    #     cart_product.quantity = F('quantity') + quantity
+    #     cart_product.save()
+    # else:
+    #     # Agregar el producto si no existe en el carrito
+    
+    # cart.products.add(product, through_defaults={
+    #     'quantity': quantity
+    # })
 
     return render(request, 'cart/add.html', {
         'product': product,
     })
+    
+def remove(request):
+    cart = funcionCarrito(request)
+    product = get_object_or_404(Product, pk=request.POST.get('product_id'))
+    
+    cart.products.remove(product)
+    
+    return redirect('cart')
+    

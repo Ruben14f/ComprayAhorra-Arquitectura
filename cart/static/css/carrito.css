@@ -84,3 +84,45 @@ img{
 .checkout-btn:hover {
     background-color: #155bb5;
 }
+
+.card{
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    max-height: 400px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.alert-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.delete {
+    background-color: #dc3545;;
+    color: white; 
+    cursor: pointer;
+    transition: background-color 0.3s; 
+}
+
+.delete:hover {
+    background-color: #1a73e8;
+    color: white;
+}
