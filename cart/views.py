@@ -28,20 +28,6 @@ def add(request):
     
     
     
-    
-    # Verificar si el producto ya está en el carrito
-    # cart_product = cart.cartproduct_set.filter(product=product).first()
-
-    # if cart_product:
-    #     # Incrementar la cantidad existente
-    #     cart_product.quantity = F('quantity') + quantity
-    #     cart_product.save()
-    # else:
-    #     # Agregar el producto si no existe en el carrito
-    
-    # cart.products.add(product, through_defaults={
-    #     'quantity': quantity
-    # })
 
     return render(request, 'cart/add.html', {
         'product': product,
