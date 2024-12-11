@@ -12,9 +12,9 @@
 
 <div class="product-detail">
     <div class="product-image">
-      {% if product.image %}
-        <img src="{{product.image.url}}" loading="lazy">
-      {% endif %}
+      <div class="card-img-top" style="width: 100%; height: 300px; background-color: #ddd; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+        <p style="font-size: 20px; color: #555;">400 x 500</p>
+      </div>
     </div>
     <div class="product-info">
         <h2>{{product.title | title }}</h2>

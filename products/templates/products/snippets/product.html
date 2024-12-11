@@ -1,9 +1,11 @@
 
 {% load static %}
 <div class="product" >
-        {% if i.image %}
-        <img src="{{i.image.url}}" loading="lazy"/>
-        {% endif %}
+        <div class="product-image">
+            <div class="card-img-top" style="width: 100%; height: 200px; background-color: #ddd; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+            <p style="font-size: 20px; color: #555;">400 x 200</p>
+            </div>
+        </div>
     <h3 class="card-text">{{i.title | title }}</h3>
     <strong class="card-text">{{i.price}}</strong>
     <p class="card-text">{{i.description | capfirst}}</p>
