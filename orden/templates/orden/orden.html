@@ -118,63 +118,53 @@
 
 <script>
     document.getElementById('paymentForm').addEventListener('submit', function (e) {
-        e.preventDefault(); // Evitar el envío por defecto del formulario
+        e.preventDefault();
         let valid = true;
 
-        // Obtener los valores de los campos
         const name = document.getElementById('card-name').value.trim();
         const cardNumber = document.getElementById('card-number').value.trim();
         const expiryDate = document.getElementById('expiry-date').value.trim();
         const cvv = document.getElementById('cvv').value.trim();
         const email = document.getElementById('email').value.trim();
 
-        // Limpiar mensajes de error previos
         document.querySelectorAll('.error-message').forEach(msg => msg.style.display = 'none');
 
-        // Validar nombre del titular (solo letras y espacios)
         if (!/^[a-zA-Z\s]+$/.test(name)) {
             showError('name-error', 'El nombre solo puede contener letras y espacios.');
             valid = false;
         }
 
-        // Validar número de tarjeta (16 dígitos)
         if (!/^\d{16}$/.test(cardNumber)) {
             showError('card-error', 'El número de tarjeta debe tener 16 dígitos.');
             valid = false;
         }
 
-        // Validar fecha de expiración (MM/AA)
         if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) {
             showError('expiry-error', 'La fecha debe estar en formato MM/AA.');
             valid = false;
         }
 
-        // Validar CVV (3 dígitos)
         if (!/^\d{3}$/.test(cvv)) {
             showError('cvv-error', 'El CVV debe tener 3 dígitos.');
             valid = false;
         }
 
-        // Validar correo electrónico
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             showError('email-error', 'Debes ingresar un correo válido.');
             valid = false;
         }
 
-        // Si todo es válido, mostrar mensaje de éxito
         if (valid) {
-            this.submit(); // Enviar el formulario al backend
+            this.submit(); 
         }
     });
 
-    // Mostrar mensaje de error
     function showError(elementId, message) {
         const errorElement = document.getElementById(elementId);
         errorElement.textContent = message;
         errorElement.style.display = 'block';
     }
 
-    // Restringir caracteres en tiempo real
     document.getElementById('card-name').addEventListener('input', function () {
         this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
     });
@@ -184,11 +174,11 @@
     });
 
     document.getElementById('expiry-date').addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, ''); // Eliminar cualquier carácter no numérico
+        this.value = this.value.replace(/\D/g, ''); 
         if (this.value.length > 2) {
             this.value = this.value.slice(0, 2) + '/' + this.value.slice(2, 4);
         }
-        this.value = this.value.slice(0, 5); // Limitar a 5 caracteres (MM/AA)
+        this.value = this.value.slice(0, 5); 
     });
 
     document.getElementById('cvv').addEventListener('input', function () {
