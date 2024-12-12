@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/add_cart.css' %}">
+<div class="card">
+    <div class="card-body" style="display: flex; flex-direction: column; text-align: center;">
+        <h2 class="title">{{ mensaje }}</h2>
+        <p>Gracias por tu compra.
+        <br>Tu pedido ha sido procesado exitosamente.</p>
+        <a href="{% url 'inicio' %}" class="btn btn-primary">Volver al Inicio</a>
+    </div>
+</div>
+
+{% endblock %}

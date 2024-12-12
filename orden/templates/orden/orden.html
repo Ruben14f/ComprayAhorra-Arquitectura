@@ -1,0 +1,178 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<style>
+    .payment-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .title {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .payment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .form-group input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .form-group input:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+
+    .error-message {
+        font-size: 12px;
+        color: red;
+        margin-top: 5px;
+        display: none;
+    }
+
+    .form-row {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        transition: background-color 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+</style>
+
+<div class="payment-container">
+    <h2 class="title">Confirmación de Pago</h2>
+    <form id="paymentForm" class="payment-form" method="POST" action="{% url 'procesar_pago' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="card-name">Nombre del Titular</label>
+            <input type="text" id="card-name" placeholder="Nombre completo" required>
+            <span class="error-message" id="name-error"></span>
+        </div>
+        <div class="form-group">
+            <label for="card-number">Número de Tarjeta</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9012 3456" required>
+            <span class="error-message" id="card-error"></span>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="expiry-date">Fecha de Expiración</label>
+                <input type="text" id="expiry-date" placeholder="MM/AA" required>
+                <span class="error-message" id="expiry-error"></span>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="123" required>
+                <span class="error-message" id="cvv-error"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" placeholder="email@ejemplo.com" required>
+            <span class="error-message" id="email-error"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Realizar Pago</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('paymentForm').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evitar el envío por defecto del formulario
+        let valid = true;
+
+        // Obtener los valores de los campos
+        const name = document.getElementById('card-name').value.trim();
+        const cardNumber = document.getElementById('card-number').value.trim();
+        const expiryDate = document.getElementById('expiry-date').value.trim();
+        const cvv = document.getElementById('cvv').value.trim();
+        const email = document.getElementById('email').value.trim();
+
+        // Limpiar mensajes de error previos
+        document.querySelectorAll('.error-message').forEach(msg => msg.style.display = 'none');
+
+        // Validar nombre del titular
+        if (name === '') {
+            showError('name-error', 'El nombre del titular es obligatorio.');
+            valid = false;
+        }
+
+        // Validar número de tarjeta (16 dígitos)
+        if (!/^\d{16}$/.test(cardNumber)) {
+            showError('card-error', 'El número de tarjeta debe tener 16 dígitos.');
+            valid = false;
+        }
+
+        // Validar fecha de expiración (MM/AA)
+        if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) {
+            showError('expiry-error', 'La fecha debe estar en formato MM/AA.');
+            valid = false;
+        }
+
+        // Validar CVV (3 dígitos)
+        if (!/^\d{3}$/.test(cvv)) {
+            showError('cvv-error', 'El CVV debe tener 3 dígitos.');
+            valid = false;
+        }
+
+        // Validar correo electrónico
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showError('email-error', 'Debes ingresar un correo válido.');
+            valid = false;
+        }
+
+        // Si todo es válido, mostrar mensaje de éxito
+        if (valid) {
+            this.submit(); // Enviar el formulario al backend
+        }
+    });
+
+    // Mostrar mensaje de error
+    function showError(elementId, message) {
+        const errorElement = document.getElementById(elementId);
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+</script>
+{% endblock %}
