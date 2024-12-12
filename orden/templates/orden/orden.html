@@ -79,7 +79,6 @@
     .btn-primary:hover {
         background-color: #0056b3;
     }
-
 </style>
 
 <div class="payment-container">
@@ -132,9 +131,9 @@
         // Limpiar mensajes de error previos
         document.querySelectorAll('.error-message').forEach(msg => msg.style.display = 'none');
 
-        // Validar nombre del titular
-        if (name === '') {
-            showError('name-error', 'El nombre del titular es obligatorio.');
+        // Validar nombre del titular (solo letras y espacios)
+        if (!/^[a-zA-Z\s]+$/.test(name)) {
+            showError('name-error', 'El nombre solo puede contener letras y espacios.');
             valid = false;
         }
 
@@ -174,5 +173,27 @@
         errorElement.textContent = message;
         errorElement.style.display = 'block';
     }
+
+    // Restringir caracteres en tiempo real
+    document.getElementById('card-name').addEventListener('input', function () {
+        this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+    });
+
+    document.getElementById('card-number').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 16);
+    });
+
+    document.getElementById('expiry-date').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, ''); // Eliminar cualquier carácter no numérico
+        if (this.value.length > 2) {
+            this.value = this.value.slice(0, 2) + '/' + this.value.slice(2, 4);
+        }
+        this.value = this.value.slice(0, 5); // Limitar a 5 caracteres (MM/AA)
+    });
+
+    document.getElementById('cvv').addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '').slice(0, 3);
+    });
+
 </script>
 {% endblock %}
