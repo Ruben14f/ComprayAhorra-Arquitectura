@@ -19,7 +19,6 @@
     <div class="product-info">
         <h2>{{product.title | title }}</h2>
         <p class="price">{{product.price}}</p>
-        <p class="description">{{product.description | capfirst  }}</p>
         <div class="actions">
             {% include 'cart/snippets/add.html'%}
         </div>
